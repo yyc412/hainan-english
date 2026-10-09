@@ -11,19 +11,19 @@
 //   • 也可填 Bilibili / YouTube 链接（网页会自动转换）
 //   • 留空 "" 则该位置不显示视频
 //
-// ⚠️ 重要：下面的 6 个 mp4 是按「文件名字母顺序」临时对应到 6 个站点的。
+// ⚠️ 重要：下面的 6 个 mp4 是按「原文件字母顺序」临时对应到 6 个站点的。
 //    如果实际录制顺序不是这样，请告诉贝利亚正确的对应关系，我来调整。
 
 window.HNFTP_VIDEOS = {
   intro: "",
 
   spots: {
-    loc:   "./0a66a369f160f58ceb32c22fd52e9b5e.mp4",
-    parks: "./140cd6ada1910ba191d940d2ce75df69.mp4",
-    food:  "./485aa005eea6e7af3a864c138fa97c45.mp4",
-    trans: "./6b1d334687b4902dcbb06082735812b9.mp4",
-    ind:   "./deb54f4060c4687a2ce21905af2a07c7.mp4",
-    pol:   "./f61dcb3755d6c48a3fafc3817e600a47.mp4"
+    loc:   "./loc.mp4",
+    parks: "./parks.mp4",
+    food:  "./food.mp4",
+    trans: "./trans.mp4",
+    ind:   "./ind.mp4",
+    pol:   "./pol.mp4"
   },
 
   final: ""
