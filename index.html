@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hello, Hainan Free Trade Port! — Travel &amp; Talk</title>
+<style>
+  :root{
+    --sea:#37b6e0; --sea-deep:#1a8fc0; --sand:#ffe9b8; --sand-dark:#f5d189;
+    --palm:#2e9e5b; --palm-dark:#1f7a44; --sun:#ffb703; --coral:#ff6b6b;
+    --ink:#22456b; --card:#fffdf6; --purple:#7c6ff0;
+  }
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  body{
+    font-family:"Comic Sans MS","Segoe UI",Verdana,sans-serif;
+    color:var(--ink);
+    background:linear-gradient(180deg,#aee6ff 0%,#d8f4ff 45%,#ffe9b8 100%);
+    min-height:100vh;
+  }
+  .hidden{display:none !important;}
+
+  /* ===== Top bar ===== */
+  #topbar{
+    position:sticky; top:0; z-index:60;
+    background:rgba(255,255,255,.94); backdrop-filter:blur(4px);
+    border-bottom:3px dashed var(--sand-dark);
+    padding:8px 16px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+  }
+  #topbar .logo{font-weight:bold; font-size:1.05rem; color:var(--sea-deep);}
+  #topbar .spacer{flex:1;}
+  .coco-chip{
+    background:linear-gradient(180deg,#fff3d6,#ffe3a3);
+    border:2px solid var(--sand-dark); border-radius:999px;
+    padding:4px 14px; font-weight:bold; font-size:.95rem;
+    display:flex; align-items:center; gap:6px;
+  }
+  .icon-btn{
+    background:#fff; border:2px solid var(--sea); color:var(--sea-deep);
+    border-radius:12px; padding:5px 12px; cursor:pointer; font-family:inherit;
+    font-weight:bold; font-size:.85rem;
+  }
+  .icon-btn:hover{background:#e8f7ff;}
+  .back-nav{
+    background:linear-gradient(180deg,#fff,#eef8ff); border-color:var(--coral);
+    color:#d94f4f; font-size:.9rem; padding:6px 16px;
+  }
+  .back-nav:hover{background:#ffeaea;}
+
+  .wrap{max-width:1020px; margin:0 auto; padding:18px 14px 90px;}
+
+  /* ===== Cover ===== */
+  #cover{text-align:center; padding-top:6px;}
+  #cover h1{
+    font-size:clamp(1.7rem,4.6vw,2.9rem); color:var(--sea-deep);
+    text-shadow:2px 3px 0 #fff, 4px 6px 0 rgba(26,143,192,.25);
+    letter-spacing:1px; margin-bottom:2px;
+  }
+  #cover .sub{
+    font-size:clamp(.95rem,2.4vw,1.25rem); color:#fff; font-weight:bold;
+    background:var(--coral); display:inline-block; padding:6px 22px;
+    border-radius:999px; box-shadow:0 4px 0 #d94f4f; margin:10px 0 4px;
+  }
+  .btn-big{
+    margin-top:18px; font-family:inherit; cursor:pointer;
+    font-size:1.2rem; font-weight:bold; color:#fff;
+    background:linear-gradient(180deg,#ffb703,#fb8500);
+    border:none; border-radius:999px; padding:13px 40px;
+    box-shadow:0 6px 0 #c96f00, 0 10px 18px rgba(0,0,0,.15);
+    transition:transform .1s;
+  }
+  .btn-big:hover{transform:translateY(-2px);}
+  .btn-big:active{transform:translateY(3px); box-shadow:0 2px 0 #c96f00;}
+  .btn-big.ghost{
+    background:linear-gradient(180deg,#fff,#eef8ff); color:var(--sea-deep);
+    box-shadow:0 5px 0 #b5dcf5; border:2px solid var(--sea);
+  }
+  .btn-big:disabled{opacity:.5; cursor:not-allowed; box-shadow:0 3px 0 #ccc;}
+  .cover-art{width:min(720px,100%); margin:4px auto 0; display:block;}
+  .bob{animation:bob 3.4s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+  .row-btns{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:14px;}
+
+  /* ===== Island map ===== */
+  #map h2{text-align:center; color:var(--sea-deep); margin:8px 0 2px; font-size:1.5rem;}
+  #map .progress-line{text-align:center; color:#7a6a45; font-size:.9rem; margin-bottom:10px;}
+  .map-board{
+    position:relative;
+    background:radial-gradient(circle at 20% 15%, #fff9e8 0 2px, transparent 3px),
+      linear-gradient(180deg,#bfeeff,#e3f9ff 70%,#ffe9b8);
+    border:4px solid #fff; border-radius:26px;
+    box-shadow:0 10px 24px rgba(26,143,192,.18);
+    padding:26px 14px 20px;
+  }
+  .stops{display:flex; flex-direction:column; gap:10px; max-width:640px; margin:0 auto;}
+  .stop{
+    display:flex; align-items:center; gap:14px;
+    background:var(--card); border:3px solid transparent; border-radius:20px;
+    padding:10px 16px; cursor:pointer; text-align:left; width:100%;
+    font-family:inherit; box-shadow:0 4px 10px rgba(0,0,0,.06);
+    transition:transform .12s, border-color .12s;
+  }
+  .stop:hover{transform:translateY(-2px);}
+  .stop .icon{
+    font-size:2rem; width:56px; height:56px; flex:0 0 56px;
+    background:#eaf7ff; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    border:3px solid #cfeaff;
+  }
+  .stop .name{font-weight:bold; font-size:1.02rem;}
+  .stop .tag{font-size:.78rem; color:#8b7a55;}
+  .stop .state{margin-left:auto; font-size:1.2rem; white-space:nowrap;}
+  .stop.done{border-color:var(--palm);}
+  .stop.done .icon{background:#e6f9ee; border-color:#bfe9d0;}
+  .final-stop{background:linear-gradient(90deg,#7c6ff0,#9a8ffb); color:#fff;}
+  .final-stop .icon{background:rgba(255,255,255,.2); border-color:rgba(255,255,255,.5);}
+  .final-stop .tag{color:#e6e2ff;}
+  .dashed{border-left:4px dashed #9fd8ef; height:24px; margin-left:60px;}
+
+  .map-head{display:flex; justify-content:flex-start; margin-bottom:6px;}
+  .stage-nav{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px;}
+
+  /* ===== Level page ===== */
+  .level-head{
+    display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+    background:var(--card); border-radius:20px; padding:12px 18px;
+    box-shadow:0 4px 12px rgba(0,0,0,.06); margin-bottom:14px;
+  }
+  .level-head .big-icon{font-size:2.4rem;}
+  .level-head h2{color:var(--sea-deep); font-size:1.3rem;}
+  .level-head .tag{font-size:.85rem; color:#8b7a55; width:100%;}
+  .back-btn{margin-left:auto;}
+  .phase-tag{
+    background:var(--purple); color:#fff; border-radius:999px;
+    padding:3px 12px; font-size:.74rem; font-weight:bold; letter-spacing:.4px;
+  }
+  .task-tip{
+    background:#fff6de; border:2px dashed var(--sun); border-radius:14px;
+    padding:10px 16px; font-size:.92rem; color:#7a6a45; margin-bottom:14px; line-height:1.6;
+  }
+  .task-tip b{color:#c96f00;}
+
+  /* ----- VIDEO STAGE ----- */
+  .video-card{
+    background:var(--card); border-radius:22px; padding:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08); border:4px solid var(--sea);
+    max-width:880px; margin:0 auto;
+  }
+  .video-card h3{color:var(--sea-deep); font-size:1.25rem; margin-bottom:4px;}
+  .video-card .step-line{font-size:.86rem; color:#8b7a55; margin-bottom:12px;}
+  .video-frame{
+    position:relative; width:100%; aspect-ratio:16/9; background:#0d2b3e;
+    border-radius:16px; overflow:hidden; display:flex; align-items:center; justify-content:center;
+    color:#cfe9f7; text-align:center; padding:16px;
+  }
+  .video-frame iframe, .video-frame video{position:absolute; inset:0; width:100%; height:100%; border:0;}
+  .slot-note{font-size:.92rem; line-height:1.7;}
+  .slot-note code{
+    background:#eaf7ff; color:var(--sea-deep); padding:1px 6px; border-radius:6px;
+    font-family:Consolas,monospace; font-size:.85rem;
+  }
+  .video-bar{display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:14px;}
+
+  /* ----- Practice stage ----- */
+  .sent{
+    background:var(--card); border-radius:18px; padding:16px 18px; margin-bottom:14px;
+    box-shadow:0 4px 12px rgba(0,0,0,.06);
+    border-left:8px solid var(--sea);
+  }
+  .sent.spoken{border-left-color:var(--palm);}
+  .sent-text{font-size:1.06rem; line-height:2.15;}
+  .blank{
+    display:inline-block; min-width:90px; text-align:center;
+    border-bottom:3px solid var(--sea-deep);
+    background:#eaf7ff; border-radius:8px 8px 0 0;
+    padding:1px 10px; margin:0 3px; cursor:pointer; font-weight:bold;
+    color:var(--sea-deep); transition:background .15s; vertical-align:baseline;
+  }
+  .blank.selected{background:var(--sun); color:#fff; border-bottom-color:#c96f00;}
+  .blank.filled{background:#d9f4e4; color:var(--palm-dark); border-bottom-color:var(--palm); cursor:pointer;}
+  .blank.shake{animation:shake .35s;}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+  .sent-tools{margin-top:10px; display:flex; gap:10px; align-items:center; flex-wrap:wrap;}
+  .mini-btn{
+    font-family:inherit; cursor:pointer; font-weight:bold; font-size:.85rem;
+    border-radius:999px; padding:6px 16px; border:none;
+  }
+  .btn-sound{background:#e3f2ff; color:var(--sea-deep); border:2px solid #b5dcf5;}
+  .btn-mic{background:var(--coral); color:#fff; box-shadow:0 3px 0 #d94f4f;}
+  .btn-mic.recording{animation:pulse 1s infinite;}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+  .btn-self{background:#eee7fb; color:var(--purple); border:2px solid #d5ccf7;}
+  .heard{
+    width:100%; font-size:.84rem; background:#f4faff; border-radius:10px;
+    padding:7px 11px; color:#56789a; line-height:1.75;
+  }
+  .heard b.ok{color:var(--palm-dark);}
+  .heard b.miss{color:var(--coral);}
+  .sent-badge{margin-left:auto; font-size:1.3rem;}
+
+  .bank{
+    position:sticky; bottom:0; z-index:40;
+    background:rgba(255,255,255,.97); border-top:3px dashed var(--sand-dark);
+    padding:10px 14px 14px; margin:18px -14px -90px;
+    box-shadow:0 -6px 16px rgba(0,0,0,.07);
+  }
+  .bank .label{font-size:.8rem; color:#8b7a55; margin-bottom:6px; font-weight:bold;}
+  .chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    background:linear-gradient(180deg,#fff,#ffe9b8);
+    border:2px solid var(--sand-dark); border-radius:999px;
+    padding:6px 16px; font-weight:bold; cursor:pointer; font-family:inherit;
+    color:#7a5a1e; font-size:.92rem; box-shadow:0 3px 0 #e8c877;
+    transition:transform .1s;
+  }
+  .chip:hover{transform:translateY(-2px);}
+  .level-done-card{
+    text-align:center; background:var(--card); border-radius:22px;
+    padding:26px 18px; box-shadow:0 8px 20px rgba(0,0,0,.08);
+    border:4px solid var(--palm);
+  }
+  .level-done-card h3{color:var(--palm-dark); font-size:1.5rem; margin-bottom:6px;}
+  .level-done-card .stars{font-size:2.2rem; margin:8px 0;}
+
+  /* ===== Final page ===== */
+  .outline-card{
+    background:var(--card); border-radius:20px; padding:18px 22px;
+    box-shadow:0 4px 12px rgba(0,0,0,.06); margin-bottom:14px;
+  }
+  .outline-card h3{color:var(--purple); margin-bottom:8px;}
+  .outline-card li{margin:8px 0 8px 20px; line-height:1.55;}
+  .model-speech{
+    background:#f6f4ff; border-left:8px solid var(--purple);
+    border-radius:12px; padding:12px 16px; line-height:2; margin-top:10px; font-size:.98rem;
+  }
+  .model-speech b{color:var(--purple);}
+  #timer{font-size:2.3rem; font-weight:bold; color:var(--sea-deep); text-align:center;}
+  .result-band{
+    background:var(--card); border-radius:20px; text-align:center;
+    padding:24px; box-shadow:0 8px 20px rgba(0,0,0,.08); border:4px solid var(--sun);
+  }
+  .result-band h2{color:#c96f00; font-size:1.5rem;}
+  .result-band .big-coco{font-size:3rem; margin:8px 0;}
+
+  /* ----- Free Talk: choose a mode ----- */
+  .mode-chooser h3{color:var(--purple); margin-bottom:10px;}
+  .mode-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .mode-card{
+    font-family:inherit; text-align:left; cursor:pointer;
+    background:#fff; border:3px dashed var(--sand-dark); border-radius:20px;
+    padding:16px 18px; display:flex; flex-direction:column;
+    transition:transform .12s, border-color .12s;
+  }
+  .mode-card:hover{transform:translateY(-3px); border-color:var(--purple);}
+  .mode-card .m-icon{font-size:2rem; line-height:1.1;}
+  .mode-card .m-name{font-size:.78rem; letter-spacing:1px; font-weight:bold; color:#8b9cb0; margin-top:4px;}
+  .mode-card .m-sub{font-size:1.18rem; font-weight:bold; color:var(--purple); margin-bottom:6px;}
+  .mode-card .m-desc{font-size:.9rem; line-height:1.65; color:#56789a;}
+  .mode-card .m-go{
+    margin-top:12px; align-self:flex-start; background:var(--purple); color:#fff;
+    border-radius:999px; padding:5px 20px; font-weight:bold; font-size:.9rem;
+  }
+  .mode-note{font-size:.85rem; color:#8b7a55; margin-top:12px;}
+  .mode-bar{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:12px;}
+  .mode-pill{
+    background:linear-gradient(90deg,#7c6ff0,#9a8ffb); color:#fff;
+    border-radius:999px; padding:5px 18px; font-weight:bold; font-size:.88rem;
+  }
+
+  /* ----- Coach feedback ----- */
+  .fb-head{text-align:center; padding:4px 0 12px; border-bottom:2px dashed var(--sand-dark); margin-bottom:14px;}
+  .fb-score{font-size:3.1rem; font-weight:bold; color:var(--sea-deep); line-height:1;}
+  .fb-score span{font-size:1.1rem; color:#8b9cb0;}
+  .fb-stars{font-size:1.7rem; margin:6px 0;}
+  .fb-grade{font-weight:bold; color:var(--purple); font-size:1.02rem;}
+  .fb-cols{display:grid; grid-template-columns:1fr 1fr; gap:18px; text-align:left;}
+  .fb-cols h4{color:var(--sea-deep); margin:8px 0 4px; font-size:.95rem;}
+  .fb-cols ul{margin-left:18px;}
+  .fb-cols li{font-size:.89rem; line-height:1.7; margin:4px 0;}
+  .fb-cols li.miss{color:#c96f00;}
+  .fb-hint{color:#8b9cb0; font-size:.83rem;}
+  .chip-lite{
+    display:inline-block; background:#f0f7ff; border:1.5px solid #cfe4f7; color:var(--sea-deep);
+    border-radius:999px; padding:3px 12px; font-size:.83rem; margin:3px 5px 0 0;
+    font-weight:bold; cursor:pointer; font-family:inherit;
+  }
+  .chip-lite:hover{background:#e2f2ff;}
+  .fb-note{font-size:.82rem; color:#8b9cb0; margin-top:14px; text-align:center;}
+
+  /* ----- Reading score (Practice Mode) ----- */
+  .rd-stats{display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin:0 0 14px;}
+  .rd-stat{background:#f2f8ff; border:2px solid #dbe9f7; border-radius:14px; padding:8px 18px; min-width:130px;}
+  .rd-stat b{display:block; font-size:1.3rem; color:var(--sea-deep); line-height:1.25;}
+  .rd-stat span{font-size:.77rem; color:#7d8fa3;}
+  .rd-text{background:#fbfdff; border:2px dashed var(--sand-dark); border-radius:14px;
+    padding:12px 14px; line-height:2.05; font-size:.95rem; text-align:left;}
+  .rd-text b.ok{color:var(--palm-dark);}
+  .rd-text b.miss{color:var(--coral); text-decoration:underline dotted; text-underline-offset:3px;}
+  .rd-keys{display:flex; gap:8px; flex-wrap:wrap;}
+  #timer.time-up{color:var(--coral);}
+  #chTimer{font-size:2.3rem; font-weight:bold; color:var(--sea-deep); text-align:center;}
+  .selfcheck{text-align:left; max-width:660px; margin:0 auto;}
+  .selfcheck label{display:flex; gap:9px; align-items:flex-start; font-size:.95rem; line-height:1.6; margin:9px 0; cursor:pointer;}
+  .selfcheck input{margin-top:5px; width:18px; height:18px; flex:0 0 auto;}
+
+  /* ===== Modal ===== */
+  .modal{
+    position:fixed; inset:0; z-index:120; background:rgba(10,40,60,.74);
+    display:flex; align-items:center; justify-content:center; padding:18px;
+  }
+  .modal-inner{
+    width:min(920px,96vw); background:#fff; border-radius:20px; padding:14px; position:relative;
+  }
+  .modal-close{
+    position:absolute; top:-14px; right:-6px; width:38px; height:38px; border-radius:50%;
+    border:none; background:var(--coral); color:#fff; font-size:1.1rem; font-weight:bold;
+    cursor:pointer; box-shadow:0 3px 0 #d94f4f;
+  }
+  .confetti{position:fixed; top:-20px; font-size:1.4rem; z-index:99; animation:fall linear forwards;}
+  @keyframes fall{to{transform:translateY(110vh) rotate(720deg);}}
+
+  @media (max-width:600px){
+    .sent-text{font-size:.98rem;}
+    .stop .name{font-size:.94rem;}
+  }
+  @media (max-width:760px){
+    .mode-grid{grid-template-columns:1fr;}
+    .fb-cols{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div id="topbar" class="hidden">
+  <button class="icon-btn back-nav hidden" id="backBtn" onclick="goBack()">↩ Back</button>
+  <span class="logo">🌴 Hello, Hainan Free Trade Port!</span>
+  <span class="spacer"></span>
+  <span class="coco-chip">🥥 <span id="cocoCount">0</span></span>
+  <button class="icon-btn" onclick="goMap()">🗺️ Map</button>
+  <button class="icon-btn" onclick="resetAll()">🔄 Restart</button>
+</div>
+
+<div class="wrap">
+
+  <!-- ================= COVER ================= -->
+  <section id="cover">
+    <h1>Hello, Hainan Free Trade Port!</h1>
+    <div class="sub">🏝️ Let's Travel Around Hainan Free Trade Port! 🏝️</div>
+
+    <!-- Cover artwork = the mind map of the six topics -->
+    <svg class="cover-art bob" viewBox="0 0 760 470" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="seaG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#7fd4f0"/><stop offset="100%" stop-color="#1a8fc0"/>
+        </linearGradient>
+        <linearGradient id="islG" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#fff3d6"/><stop offset="100%" stop-color="#f5d189"/>
+        </linearGradient>
+      </defs>
+
+      <circle cx="672" cy="62" r="34" fill="#ffb703"/>
+      <g stroke="#ffb703" stroke-width="5" stroke-linecap="round">
+        <line x1="672" y1="14" x2="672" y2="4"/><line x1="672" y1="110" x2="672" y2="120"/>
+        <line x1="624" y1="62" x2="614" y2="62"/><line x1="720" y1="62" x2="730" y2="62"/>
+        <line x1="638" y1="28" x2="631" y2="21"/><line x1="706" y1="96" x2="713" y2="103"/>
+        <line x1="706" y1="28" x2="713" y2="21"/><line x1="638" y1="96" x2="631" y2="103"/>
+      </g>
+      <g fill="#ffffff" opacity=".95">
+        <ellipse cx="120" cy="52" rx="46" ry="17"/><ellipse cx="152" cy="43" rx="30" ry="13"/>
+        <ellipse cx="380" cy="34" rx="36" ry="12"/>
+      </g>
+
+      <rect x="0" y="352" width="760" height="118" fill="url(#seaG)"/>
+      <path d="M0 356 Q40 344 80 356 T160 356 T240 356 T320 356 T400 356 T480 356 T560 356 T640 356 T720 356 T800 356 V370 H0 Z" fill="#a6e4f7"/>
+
+      <ellipse cx="380" cy="330" rx="215" ry="40" fill="url(#islG)"/>
+
+      <circle cx="380" cy="300" r="74" fill="#fffdf6" stroke="#ff6b6b" stroke-width="6"/>
+      <text x="380" y="290" text-anchor="middle" font-size="21" font-weight="bold" fill="#1a8fc0" font-family="Comic Sans MS, sans-serif">Hainan</text>
+      <text x="380" y="316" text-anchor="middle" font-size="17" font-weight="bold" fill="#ff6b6b" font-family="Comic Sans MS, sans-serif">Free Trade Port</text>
+
+      <g stroke="#1a8fc0" stroke-width="3" stroke-dasharray="7 6" fill="none">
+        <path d="M310 270 C250 232 210 200 160 178"/>
+        <path d="M450 270 C510 232 550 200 600 178"/>
+        <path d="M308 306 C240 306 190 306 122 306"/>
+        <path d="M452 306 C520 306 570 306 638 306"/>
+        <path d="M316 334 C258 366 214 396 162 424"/>
+        <path d="M444 334 C502 366 546 396 598 424"/>
+      </g>
+
+      <g>
+        <rect x="16" y="140" width="188" height="46" rx="23" fill="#eaf7ff" stroke="#37b6e0" stroke-width="3"/>
+        <text x="110" y="160" text-anchor="middle" font-size="13" font-weight="bold" fill="#22456b" font-family="Comic Sans MS, sans-serif">🏖️ Location &amp;</text>
+        <text x="110" y="176" text-anchor="middle" font-size="13" font-weight="bold" fill="#22456b" font-family="Comic Sans MS, sans-serif">Natural Environment</text>
+      </g>
+      <g>
+        <rect x="556" y="140" width="188" height="46" rx="23" fill="#eaf7ff" stroke="#37b6e0" stroke-width="3"/>
+        <text x="650" y="160" text-anchor="middle" font-size="13" font-weight="bold" fill="#22456b" font-family="Comic Sans MS, sans-serif">🎢 Theme Parks</text>
+        <text x="650" y="176" text-anchor="middle" font-size="11" fill="#56789a" font-family="Comic Sans MS, sans-serif">resorts · Li &amp; Miao culture</text>
+      </g>
+      <g>
+        <rect x="8" y="283" width="150" height="46" rx="23" fill="#fff3d6" stroke="#f5d189" stroke-width="3"/>
+        <text x="83" y="303" text-anchor="middle" font-size="13" font-weight="bold" fill="#7a5a1e" font-family="Comic Sans MS, sans-serif">🍗 The Many</text>
+        <text x="83" y="319" text-anchor="middle" font-size="13" font-weight="bold" fill="#7a5a1e" font-family="Comic Sans MS, sans-serif">Flavors of Hainan</text>
+      </g>
+      <g>
+        <rect x="612" y="283" width="142" height="46" rx="23" fill="#fff3d6" stroke="#f5d189" stroke-width="3"/>
+        <text x="683" y="303" text-anchor="middle" font-size="13" font-weight="bold" fill="#7a5a1e" font-family="Comic Sans MS, sans-serif">🚄 Convenient</text>
+        <text x="683" y="319" text-anchor="middle" font-size="13" font-weight="bold" fill="#7a5a1e" font-family="Comic Sans MS, sans-serif">Transportation</text>
+      </g>
+      <g>
+        <rect x="70" y="404" width="150" height="46" rx="23" fill="#e6f9ee" stroke="#bfe9d0" stroke-width="3"/>
+        <text x="145" y="424" text-anchor="middle" font-size="13" font-weight="bold" fill="#1f7a44" font-family="Comic Sans MS, sans-serif">🚀 Industries</text>
+        <text x="145" y="440" text-anchor="middle" font-size="11" fill="#5c8b6f" font-family="Comic Sans MS, sans-serif">tourism · high-tech</text>
+      </g>
+      <g>
+        <rect x="542" y="404" width="150" height="46" rx="23" fill="#e6f9ee" stroke="#bfe9d0" stroke-width="3"/>
+        <text x="617" y="424" text-anchor="middle" font-size="13" font-weight="bold" fill="#1f7a44" font-family="Comic Sans MS, sans-serif">📜 Major Policies</text>
+        <text x="617" y="440" text-anchor="middle" font-size="11" fill="#5c8b6f" font-family="Comic Sans MS, sans-serif">low tax · visa-free</text>
+      </g>
+
+      <g>
+        <path d="M262 330 C258 282 264 250 268 228" stroke="#8a5a2b" stroke-width="12" fill="none" stroke-linecap="round"/>
+        <g fill="#2e9e5b">
+          <path d="M268 228 C230 200 192 205 176 222 C208 216 240 222 268 234 Z"/>
+          <path d="M268 228 C306 200 344 205 360 222 C328 216 296 222 268 234 Z"/>
+          <path d="M268 226 C256 190 230 174 208 176 C236 183 256 204 268 230 Z"/>
+          <path d="M268 226 C280 190 306 174 328 176 C300 183 280 204 268 230 Z"/>
+        </g>
+        <circle cx="260" cy="237" r="8" fill="#8a5a2b"/><circle cx="275" cy="239" r="8" fill="#8a5a2b"/>
+      </g>
+      <g>
+        <circle cx="500" cy="308" r="17" fill="#8a5a2b"/>
+        <circle cx="500" cy="308" r="11" fill="#fff6e0"/>
+        <rect x="502" y="276" width="5" height="24" rx="2" fill="#ff6b6b" transform="rotate(12 504 288)"/>
+        <path d="M493 295 C486 287 482 285 476 284 C482 291 486 294 493 299 Z" fill="#2e9e5b"/>
+      </g>
+      <g>
+        <path d="M96 396 C107 410 139 410 150 396 Z" fill="#ff6b6b"/>
+        <rect x="120" y="364" width="4" height="32" fill="#7a5a1e"/>
+        <path d="M124 364 L124 390 L146 388 Z" fill="#ffffff"/>
+        <path d="M120 367 L120 388 L102 386 Z" fill="#ffd166"/>
+      </g>
+      <g fill="#ffb703">
+        <path d="M652 430 C663 422 676 422 682 430 C676 438 663 438 652 430 Z"/>
+        <path d="M652 430 L644 424 L644 436 Z"/>
+      </g>
+      <text x="380" y="462" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a8fc0" font-family="Comic Sans MS, sans-serif">Six stops · Six topics · One island</text>
+    </svg>
+
+    <div class="row-btns">
+      <button class="btn-big" onclick="goMap()">▶ Start the Trip</button>
+      <button class="btn-big ghost hidden" id="introVideoBtn" onclick="openModal(VIDEOS.intro)">🎬 Watch the Intro Video</button>
+    </div>
+  </section>
+
+  <!-- ================= MAP ================= -->
+  <section id="map" class="hidden">
+    <div class="map-head">
+      <button class="icon-btn back-nav" onclick="goBack()">↩ Back to Cover</button>
+    </div>
+    <h2>🗺️ Hainan Island Map</h2>
+    <p class="progress-line">Choose any stop you like — watch the video 🎬 if you want, fill in the blanks ✍️, then read the sentences aloud 🎤. Every coconut 🥥 you collect is a point.</p>
+    <div class="map-board">
+      <div class="stops" id="stopList"></div>
+    </div>
+  </section>
+
+  <!-- ================= LEVEL ================= -->
+  <section id="level" class="hidden">
+    <div class="level-head">
+      <span class="big-icon" id="lvIcon">🏖️</span>
+      <div>
+        <span class="phase-tag" id="phaseTag">Fill in the blanks ✍️</span>
+        <h2 id="lvTitle">Title</h2>
+      </div>
+      <button class="icon-btn back-btn" onclick="goMap()">← Back to Map</button>
+      <span class="tag" id="lvTag"></span>
+    </div>
+
+    <div class="stage-nav">
+      <button class="icon-btn back-nav" onclick="goMap()">← Back to Map</button>
+    </div>
+
+    <!-- ---- VIDEO (optional, never blocks the questions) ---- -->
+    <div class="video-card hidden" id="videoCard" style="margin-bottom:14px">
+      <h3>🎬 Video for this stop</h3>
+      <p class="step-line">Watch it for ideas — you can also go straight to the questions below.</p>
+      <div class="video-frame" id="videoFrame"></div>
+    </div>
+
+    <div class="task-tip" id="fillTip">
+      <b>Fill in the blanks.</b> Tap a blank, then tap the correct word chip at the bottom. When a sentence is complete, a 🎤 button appears — tap it and read the sentence aloud to earn coconuts.
+    </div>
+    <div class="task-tip hidden" id="speakTip">
+      <b>Speak it out!</b> All blanks are done. Tap 🎤 and read each sentence aloud; the game listens and gives you coconuts. No microphone? Tap “Read it ✓”.
+    </div>
+
+    <div id="sentList"></div>
+
+    <div class="bank" id="bank">
+      <div class="label">🔑 Word Bank — tap a word to fill the blank</div>
+      <div class="chips" id="chipList"></div>
+    </div>
+
+    <div id="levelDone" class="level-done-card hidden">
+      <h3 id="lvDoneTitle">🎉 Stop Complete!</h3>
+      <div class="stars" id="lvStars">⭐⭐⭐</div>
+      <p id="lvDoneMsg"></p>
+      <div class="row-btns">
+        <button class="btn-big ghost" onclick="goMap()">🗺️ Back to Map</button>
+        <button class="btn-big hidden" id="nextStopBtn" onclick="nextStop()">➡ Next Stop</button>
+        <button class="btn-big hidden" id="toFinalBtn" onclick="openFinal()">🎤 Go to the Final Challenge</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FINAL ================= -->
+  <section id="final" class="hidden">
+    <div class="level-head">
+      <span class="big-icon">🎤</span>
+      <div><span class="phase-tag">FINAL CHALLENGE</span><h2>Free Talk: Introduce Hainan Free Trade Port</h2></div>
+      <button class="icon-btn back-btn" onclick="goMap()">← Map</button>
+      <span class="tag">Speak for about one minute, using the six topics you have practiced.</span>
+    </div>
+
+    <!-- ====== CHOOSE A MODE ====== -->
+    <div id="modeChooser" class="outline-card mode-chooser">
+      <h3>🎤 Choose how you want to do the Free Talk</h3>
+      <div class="mode-grid">
+        <button class="mode-card" onclick="setFinalMode('speak')">
+          <span class="m-icon">🎯</span>
+          <span class="m-name">CHALLENGE MODE</span>
+          <span class="m-sub">Speak It Yourself</span>
+          <span class="m-desc">Look at the six hints and give your own one-minute talk — no text to read. When you finish, the game scores your speech and tells you exactly what to improve.</span>
+          <span class="m-go">Start ▶</span>
+        </button>
+        <button class="mode-card" onclick="setFinalMode('read')">
+          <span class="m-icon">🎧</span>
+          <span class="m-name">PRACTICE MODE</span>
+          <span class="m-sub">Listen &amp; Read Along</span>
+          <span class="m-desc">See the hints and the whole model talk, listen to it first, then read the whole text aloud from beginning to end. Great for building confidence before the challenge.</span>
+          <span class="m-go">Start ▶</span>
+        </button>
+      </div>
+      <p class="mode-note">Not sure which one to pick? Try Practice Mode first, then come back and take the Challenge.</p>
+    </div>
+
+    <div id="finalBody" class="hidden">
+    <div class="mode-bar">
+      <span class="mode-pill" id="modePill">Mode</span>
+      <button class="icon-btn" onclick="chooseFinalMode()">↔ Switch Mode</button>
+      <button class="icon-btn" onclick="goMap()">← Back to Map</button>
+    </div>
+
+    <div class="video-card hidden" id="finalVideoCard" style="margin-bottom:14px">
+      <h3>🎬 Watch first, then speak</h3>
+      <p class="step-line">Use this video for ideas and useful expressions.</p>
+      <div class="video-frame" id="finalVideoFrame"></div>
+      <div class="video-bar">
+        <button class="btn-big" onclick="openModal(VIDEOS.final)" style="padding:10px 28px;font-size:1rem">🔍 Play on the Big Screen</button>
+      </div>
+    </div>
+
+    <div class="outline-card">
+      <h3>📝 Speaking Outline</h3>
+      <ol>
+        <li><b>Greeting &amp; topic:</b> Hello everyone! Today I'd like to introduce Hainan Free Trade Port.</li>
+        <li><b>Location &amp; environment:</b> in far southern China, gateway to the Pacific and Indian Oceans, tropical climate.</li>
+        <li><b>Fun things:</b> theme parks, Hainan food, the scenic coastal highway.</li>
+        <li><b>Industries:</b> tourism, modern services, high-tech industry, the space launch center.</li>
+        <li><b>Policies:</b> low tax rates, visa-free entry for 59 countries, duty-free shopping.</li>
+        <li><b>Ending:</b> Welcome to Hainan! Thank you!</li>
+      </ol>
+    </div>
+
+    <!-- ===================== PRACTICE MODE ===================== -->
+    <div id="readPanel" class="hidden">
+      <div class="outline-card">
+        <h3>🎧 Step 1 · Listen to the Model Talk</h3>
+        <p class="step-line">Listen to the whole talk first. Then read the whole talk aloud — the full text is right below.</p>
+        <div class="model-speech" id="modelSpeech"></div>
+        <div class="row-btns">
+          <button class="mini-btn btn-sound" style="padding:10px 22px;font-size:1rem" onclick="readModel()">🔊 Listen to the Model</button>
+          <button class="mini-btn btn-self" style="padding:10px 22px;font-size:1rem" onclick="stopSpeaking()">⏹ Stop</button>
+        </div>
+      </div>
+
+      <div class="outline-card" style="text-align:center">
+        <h3>⏱️ Step 2 · Read the Whole Talk</h3>
+        <p class="step-line">Read the whole talk aloud from beginning to end. You have <b>2 minutes</b>. The game listens, and when you stop it scores your reading and tells you what to improve.</p>
+        <div id="timer">120</div>
+        <div class="row-btns">
+          <button class="mini-btn btn-mic" style="padding:10px 26px;font-size:1rem" id="finalMic" onclick="startFinalSpeech()">🎤 Start Reading</button>
+          <button class="mini-btn btn-self hidden" style="padding:10px 26px;font-size:1rem" id="finalStop" onclick="finishReading()">🛑 Stop &amp; Get My Score</button>
+          <button class="mini-btn btn-self hidden" style="padding:10px 26px;font-size:1rem" id="finalSelf" onclick="finishSelf()">✅ I read it (no score)</button>
+          <button class="mini-btn btn-self hidden" style="padding:10px 26px;font-size:1rem" id="finalAgain" onclick="resetReading()">🔄 Try Again</button>
+        </div>
+        <div class="heard hidden" id="finalHeard" style="margin-top:12px;text-align:left"></div>
+      </div>
+
+      <div class="outline-card hidden" id="rdFeedback"></div>
+    </div>
+
+    <!-- ===================== CHALLENGE MODE ===================== -->
+    <div id="challengePanel" class="hidden">
+      <div class="outline-card" style="text-align:center">
+        <h3>🎯 Step 1 · Speak It Yourself</h3>
+        <p class="step-line">Use the outline above as your guide. Talk for about one minute in your own words. When you finish, tap <b>“Finish &amp; Get Feedback”</b> — the game will score your talk and give you advice.</p>
+        <div id="chTimer">60</div>
+        <div class="row-btns">
+          <button class="mini-btn btn-mic" style="padding:10px 26px;font-size:1rem" id="chMic" onclick="chStart()">🎤 Start Speaking</button>
+          <button class="mini-btn btn-self hidden" style="padding:10px 26px;font-size:1rem" id="chStop" onclick="chFinish()">🛑 Finish &amp; Get Feedback</button>
+          <button class="mini-btn btn-self hidden" style="padding:10px 26px;font-size:1rem" id="chAgain" onclick="chReset()">🔄 Try Again</button>
+        </div>
+        <div class="heard hidden" id="chHeard" style="margin-top:12px;text-align:left"></div>
+      </div>
+
+      <div class="outline-card hidden" id="chSelfCheck">
+        <h3>✅ Check Your Own Talk</h3>
+        <p class="step-line">The microphone was not available, so check the things you actually said — you will still get a score and advice.</p>
+        <div class="selfcheck" id="chSelfList"></div>
+        <div class="row-btns">
+          <button class="btn-big" onclick="chScoreSelf()">📊 See My Score</button>
+        </div>
+      </div>
+
+      <div class="outline-card hidden" id="chFeedback"></div>
+    </div>
+    </div>
+
+    <div id="finalResult" class="result-band hidden">
+      <h2>🏆 Certificate of a Young Hainan Ambassador</h2>
+      <div class="big-coco">🥥🌴⭐🌴🥥</div>
+      <p id="finalMsg"></p>
+      <div class="row-btns">
+        <button class="btn-big ghost" onclick="goMap()">🗺️ Back to Map</button>
+        <button class="btn-big" onclick="resetAll()">🔄 Play Again</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ================= MODAL ================= -->
+<div id="videoModal" class="modal hidden">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="video-frame" id="modalFrame"></div>
+  </div>
+</div>
+
+<!-- ===== VIDEO LINKS (optional) =====
+     Put your video links in the file "videos.js" next to this page —
+     it is much easier to edit than this file.                        -->
+<script src="videos.js"></script>
+<script>
+/* =====================================================================
+   TEACHER SETTINGS — where to put the video links
+   ---------------------------------------------------------------------
+   Easiest way:  open the file  videos.js  (in the same folder as this
+   page) and paste your links there. Lines starting with "//" are notes.
+
+   Or paste them directly into the block below.
+   Accepted link types (converted automatically):
+     • Bilibili video page   https://www.bilibili.com/video/BV1xxxxxxxxx
+     • YouTube video page    https://www.youtube.com/watch?v=xxxxxxx
+     • A local video file    video/loc.mp4   (a  video  folder next to
+                             this page, file names: loc / parks / food /
+                             trans / ind / pol / intro / final .mp4)
+     • An embed address      https://player.bilibili.com/player.html?bvid=...
+   Leave "" empty and that stop shows an empty video slot; students may
+   then go straight to the questions.
+   ===================================================================== */
+const CFG = window.HNFTP_VIDEOS || {};
+const VIDEOS = {
+  intro: CFG.intro || "",
+  spots: Object.assign({ loc:"", parks:"", food:"", trans:"", ind:"", pol:"" }, CFG.spots || {}),
+  final: CFG.final || ""
+};
+
+/* =====================================================================
+   CONTENT — textbook pages 2–8
+   ===================================================================== */
+const LEVELS = [
+  { id:"loc", icon:"🏖️", title:"Location & Natural Environment", tag:"Where Hainan is and what it looks like",
+    sentences:[
+      {t:"Hainan, located in far ___ China, is not only an important gateway to the ___ Oceans, but also a shining pearl of the ___.",
+       a:["southern","Pacific and Indian","Maritime Silk Road"]},
+      {t:"Hainan boasts a land area of ___ km² and a vast sea area of ___ km², as well as a coastline stretching out over ___ kilometers.",
+       a:["35,400","2.2 million","1,900"]},
+      {t:"Hainan's ___ climate gives the province pleasantly warm and humid weather with ___ and mild winters.",
+       a:["tropical marine monsoon","long summers"]},
+      {t:"This is China's largest ___ and \u201Cnatural oxygen bar\u201D.",
+       a:["natural greenhouse"]}
+    ]},
+
+  { id:"parks", icon:"🎢", title:"Theme Parks", tag:"Resorts, theme parks and Li & Miao culture",
+    sentences:[
+      {t:"Sanya Atlantis Resort has a total of 1,314 ___ rooms, as well as the Lost Chambers Aquarium, the Aquaventure Water Park, Dolphin Cay and many top-notch ___ facilities.",
+       a:["sea-view","entertainment"]},
+      {t:"Sanya's Haichang Fantasy Town and the world's largest artificial island, Ocean Flower Island, are ___ resort areas with theme parks, hotels, ___ options that are sure to please all visitors.",
+       a:["one-stop","shopping and dining"]},
+      {t:"The Mission Hills Resort Haikou Area offers ___, health and wellness activities, as well as cultural activities, making it one of Hainan's top ___.",
+       a:["sports","travel attractions"]},
+      {t:"The Li and Miao peoples of Hainan have ___ and fascinating cultures. Li Brocade, the ___ in China, dates back over 3,000 years and has been recognized as an ___ by UNESCO. Hainan's Betel Nut Valley is a great place to learn about Li and Miao culture.",
+       a:["long histories","earliest cotton textile","intangible cultural heritage"]}
+    ]},
+
+  { id:"food", icon:"🍗", title:"The Many Flavors of Hainan", tag:"Four signature dishes and street food",
+    sentences:[
+      {t:"There are so many ___ things to eat in Hainan. Wenchang ___, Jiaji ___, Dongshan ___, and Hele ___ are known as Hainan's ___.",
+       a:["tasty","Chicken","Duck","Mutton","Crab","four signature dishes"]},
+      {t:"Visit the bustling morning and night markets for local treats, such as ___ soup, \u2018Old Dad's ___\u2019, and ___ barbecue, which will please your palate with the tropical flavors of Hainan.",
+       a:["rice noodle","Tea","seafood"]}
+    ]},
+
+  { id:"trans", icon:"🚄", title:"Convenient Transportation Options", tag:"Airports, high-speed rail and the coastal highway",
+    sentences:[
+      {t:"Hainan boasts convenient transportation. In aviation, there are ___ airports. The round-island ___ encircle the entire province, creating a \u201C___\u201D.",
+       a:["3","high-speed rail and highway system","one-hour economic circle"]},
+      {t:"Hainan also has a ___, stretching a total distance of nearly 1,000 km and connecting all ___.",
+       a:["scenic coastal highway","12 coastal cities and counties"]}
+    ]},
+
+  { id:"ind", icon:"🚀", title:"Industries", tag:"Tourism, high-tech, agriculture and green energy",
+    sentences:[
+      {t:"Hainan Free Trade Port (FTP) is accelerating the development of a modern industrial system led by ___, ___, ___, and high-efficiency tropical agriculture.",
+       a:["tourism","modern services","high-tech industry"]},
+      {t:"The Nanfan Agricultural Silicon Valley cultivates over ___ of China's new ___.",
+       a:["70%","crop varieties"]},
+      {t:"The Wenchang Space Launch Center is China's ___ spaceport. Also located in Wenchang is the country's first ___ space launch site.",
+       a:["southernmost low-latitude coastal","commercial"]},
+      {t:"Hainan is expanding offshore ___ and green hydrogen production, speeding up the development of internationally competitive ___.",
+       a:["wind power","green energy supply chains"]},
+      {t:"The Boao Lecheng International Medical Tourism Pilot Zone has implemented a ___ on imported medical products.",
+       a:["zero-tariff policy"]},
+      {t:"The Lingshui Li'an International Education Innovation Pilot Zone has attracted 22 renowned ___ of higher learning.",
+       a:["domestic and international institutes"]},
+      {t:"Hainan continues to develop as a platform for ___. Major events such as ___ and the China International Consumer Products Expo are held there annually, drawing ___.",
+       a:["international exchange","the Boao Forum for Asia","global attention"]}
+    ]},
+
+  { id:"pol", icon:"📜", title:"Major Policies", tag:"Low tax rates, visa-free entry and duty-free shopping",
+    sentences:[
+      {t:"It offers clear policy advantages, including ___ with a dual 15% income tax policy: one for high-caliber and urgently needed ___ and another for ___ in encouraged industries.",
+       a:["low tax rates","professionals","enterprises"]},
+      {t:"Hainan has China's first ___ for cross-border trade in services and the shortest negative list for ___.",
+       a:["negative list","foreign investment"]},
+      {t:"Hainan offers visa-free entry to citizens from ___. Travelers can enter through any of Hainan's open ___ without a ___ and stay for up to ___. In addition, a new ___ has been introduced for ___.",
+       a:["59 countries","ports","visa","30 days","144-hour visa-free policy","international tour groups"]},
+      {t:"The Hainan Island Departure ___ means you can shop to your heart's content while also enjoying the local scenery.",
+       a:["Duty-Free Shopping Policy"]}
+    ]}
+];
+
+/* ================== STATE ================== */
+let S = { cocos:0, unlocked:0, done:[], spoken:{}, watched:{}, finalDone:false };
+try{ const raw = localStorage.getItem("hnftp_game"); if(raw) S = Object.assign(S, JSON.parse(raw)); }catch(e){}
+function save(){ try{ localStorage.setItem("hnftp_game", JSON.stringify(S)); }catch(e){} updateCocos(); }
+
+let cur = null, picked = null, chipsUsed = {}, shufChips = [], fillMap = {};
+let currentScreen = "cover", screenStack = [];
+const $ = s => document.querySelector(s);
+const SCREENS = ["cover","map","level","final"];
+function show(id, push){
+  if(push === undefined) push = true;
+  SCREENS.forEach(x => $("#" + x).classList.add("hidden"));
+  $("#" + id).classList.remove("hidden");
+  $("#topbar").classList.remove("hidden");
+  if(push && id !== currentScreen) screenStack.push(currentScreen);
+  if(!push && id !== currentScreen) screenStack = screenStack.slice(0, Math.max(0, screenStack.length - 1));
+  currentScreen = id;
+  updateBackBtn();
+  window.scrollTo(0, 0);
+}
+function parentOf(screen){
+  if(screen === "level" || screen === "final") return "map";
+  if(screen === "map") return "cover";
+  return null;                     // cover has no parent
+}
+function updateBackBtn(){
+  const btn = $("#backBtn");
+  if(!btn) return;
+  const p = parentOf(currentScreen);
+  if(!p){ btn.classList.add("hidden"); return; }
+  btn.classList.remove("hidden");
+  btn.textContent = (p === "cover") ? "↩ Back to Cover" : "↩ Back to Map";
+}
+function goBack(){
+  const p = parentOf(currentScreen);
+  if(!p) return;
+  if(currentScreen === "final") leaveFinal();
+  if(currentScreen === "level" || currentScreen === "final"){ renderMap(); show("map", false); }
+  else show(p, false);
+}
+document.addEventListener("keydown", e=>{
+  if(e.key !== "Escape") return;
+  if(!$("#videoModal").classList.contains("hidden")){ closeModal(); return; }
+  goBack();
+});
+function updateCocos(){ $("#cocoCount").textContent = S.cocos; }
+
+/* ================== VIDEO ================== */
+function fileUrlFromPath(p){
+  let s = p.trim();
+  if(/^file:\/\//i.test(s)) return s;
+  s = s.replace(/\\/g, "/");
+  if(/^[A-Za-z]:\//.test(s)) return "file:///" + encodeURI(s).replace(/#/g, "%23");
+  return null;                       // relative path, not absolute
+}
+function isLocalFile(url){ return /^file:\/\//i.test(url || ""); }
+function toEmbed(url){
+  if(!url) return null;
+  const u = url.trim();
+  // 1) an absolute local path such as  C:\videos\loc.mp4
+  const abs = fileUrlFromPath(u);
+  if(abs) return {kind:"file", url:abs};
+  // 2) a relative local file such as  video/loc.mp4
+  if(/\.(mp4|webm|ogg|ogv|mov|m4v)(\?.*)?$/i.test(u) || /^(\.{0,2}\/|video\/|videos\/|assets\/)/i.test(u)){
+    return {kind:"file", url:u};
+  }
+  let m = u.match(/bilibili\.com\/video\/(BV[0-9A-Za-z]+)/);
+  if(m) return {kind:"frame", url:"//player.bilibili.com/player.html?bvid="+m[1]+"&autoplay=0&high_quality=1&danmaku=0"};
+  m = u.match(/bilibili\.com\/video\/av(\d+)/i);
+  if(m) return {kind:"frame", url:"//player.bilibili.com/player.html?aid="+m[1]+"&autoplay=0&high_quality=1&danmaku=0"};
+  m = u.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{6,})/);
+  if(m) return {kind:"frame", url:"https://www.youtube.com/embed/"+m[1]};
+  return {kind:"frame", url:u};
+}
+function buildPlayer(container, rawUrl, onEnded){
+  container.innerHTML = "";
+  const e = toEmbed(rawUrl);
+  if(!e){
+    container.innerHTML = '<div class="slot-note">🎬 <b>Video slot</b> — nothing has been added yet.<br>' +
+      'Open <code>videos.js</code> (in the same folder as this page) and paste a file name or a video link.<br>' +
+      'You can start the questions right away.</div>';
+    return false;
+  }
+  if(e.kind === "file"){
+    const v = document.createElement("video");
+    v.src = e.url; v.controls = true; v.playsInline = true; v.preload = "metadata";
+    if(onEnded) v.addEventListener("ended", onEnded);
+    v.addEventListener("error", ()=>{
+      note(container, "⚠️ This video could not be loaded. If you opened the page from a web link, " +
+        "check that all the video files were uploaded to the video folder on the server. " +
+        "If you opened the page from your own computer, double-click the .html file to open it.");
+    });
+    container.appendChild(v);
+    container._video = v;
+    if(isLocalFile(e.url) && /^https?:$/.test(location.protocol)){
+      note(container, "ℹ️ This stop uses a local video file. Open this page by double-clicking the .html file so the video can play.");
+    }
+  }else{
+    const f = document.createElement("iframe");
+    f.src = e.url;
+    f.allow = "accelerometer; autoplay; encrypted-media; picture-in-picture; fullscreen";
+    f.allowFullscreen = true;
+    container.appendChild(f);
+  }
+  return true;
+}
+function note(container, text){
+  const n = document.createElement("div");
+  n.className = "slot-note";
+  n.style.cssText = "position:absolute; bottom:10px; left:10px; right:10px; background:rgba(255,255,255,.94); border-radius:10px; padding:8px 12px; color:#22456b;";
+  n.textContent = text;
+  container.appendChild(n);
+}
+
+/* ================== MAP ================== */
+function goMap(){ renderMap(); show("map"); }
+function renderMap(){
+  const list = $("#stopList"); list.innerHTML = "";
+  LEVELS.forEach((lv,i)=>{
+    const done = S.done.includes(lv.id);
+    const hasVideo = !!VIDEOS.spots[lv.id];
+    const b = document.createElement("button");
+    b.className = "stop" + (done ? " done" : "");
+    b.innerHTML = '<span class="icon">' + lv.icon + '</span>' +
+      '<span><div class="name">Stop ' + (i+1) + ' · ' + lv.title + '</div>' +
+      '<div class="tag">' + lv.tag + (hasVideo ? ' · 🎬 video' : '') + '</div></span>' +
+      '<span class="state">' + (done ? "✅" : "▶️") + '</span>';
+    b.onclick = ()=>openLevel(i);
+    list.appendChild(b);
+    if(i < LEVELS.length-1){ const d = document.createElement("div"); d.className = "dashed"; list.appendChild(d); }
+  });
+  const f = document.createElement("button");
+  f.className = "stop final-stop";
+  f.innerHTML = '<span class="icon">🎤</span>' +
+    '<span><div class="name">Final · Free Talk: Introduce Hainan FTP</div>' +
+    '<div class="tag">Your one-minute introduction</div></span>' +
+    '<span class="state">' + (S.finalDone ? "🏆" : "▶️") + '</span>';
+  f.onclick = openFinal;
+  list.appendChild(f);
+}
+function nextStop(){
+  const i = LEVELS.indexOf(cur);
+  if(i + 1 < LEVELS.length) openLevel(i + 1);
+  else openFinal();
+}
+
+/* ================== LEVEL ================== */
+function shuffle(a){ a = a.slice(); for(let i=a.length-1;i>0;i--){ const j = Math.floor(Math.random()*(i+1)); const t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+function openLevel(i){
+  cur = LEVELS[i];
+  if(!S.spoken[cur.id]) S.spoken[cur.id] = cur.sentences.map(()=>false);
+  picked = null; chipsUsed = {}; shufChips = [];
+  cur.sentences.forEach((sn,si)=> sn.a.forEach((ans,pi)=>{ if(filledValue(cur.id,si,pi)) chipsUsed[ans] = true; }));
+
+  $("#lvIcon").textContent = cur.icon;
+  $("#lvTitle").textContent = "Stop " + (i+1) + " · " + cur.title;
+  $("#lvTag").textContent = cur.tag;
+  $("#levelDone").classList.add("hidden");
+  $("#nextStopBtn").classList.add("hidden");
+  $("#toFinalBtn").classList.add("hidden");
+
+  // the video is simply shown at the top of the page — it never blocks the questions
+  const card = $("#videoCard"), frame = $("#videoFrame");
+  frame.innerHTML = ""; frame._video = null;
+  if(VIDEOS.spots[cur.id]){
+    card.classList.remove("hidden");
+    buildPlayer(frame, VIDEOS.spots[cur.id], null);
+  }else{
+    card.classList.add("hidden");
+  }
+
+  renderSentences(); renderBank();
+  applyStageUI();
+  checkLevelDone();          // re-entering a finished stop shows the Next Stop button again
+  show("level");
+  updatePhaseTag();
+  updateBackBtn();
+}
+function openModal(url){
+  if(!buildPlayer($("#modalFrame"), url, null)) return;
+  $("#videoModal").classList.remove("hidden");
+}
+function closeModal(){ $("#videoModal").classList.add("hidden"); $("#modalFrame").innerHTML = ""; }
+
+/* ---------- blanks ---------- */
+function renderSentences(){
+  const box = $("#sentList"); box.innerHTML = "";
+  cur.sentences.forEach((sn,si)=>{
+    const div = document.createElement("div");
+    div.className = "sent" + (S.spoken[cur.id][si] ? " spoken" : "");
+    div.id = "sent" + si;
+    const parts = sn.t.split("___");
+    let html = '<div class="sent-text">';
+    parts.forEach((p,pi)=>{
+      html += escapeHtml(p);
+      if(pi < sn.a.length){
+        const v = filledValue(cur.id,si,pi);
+        html += '<span class="blank ' + (v ? "filled" : "") + '" data-s="' + si + '" data-b="' + pi +
+                '" onclick="pickBlank(this)">' + (v || "______") + '</span>';
+      }
+    });
+    html += '</div><div class="sent-tools" id="tools' + si + '">';
+    if(sentenceComplete(si)) html += micToolsHTML(si);
+    html += '</div>';
+    div.innerHTML = html;
+    box.appendChild(div);
+  });
+  updatePhaseTag();
+}
+function escapeHtml(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
+function filledValue(id,si,pi){ return fillMap[id + "_" + si + "_" + pi] || ""; }
+function setFilled(id,si,pi,v){ fillMap[id + "_" + si + "_" + pi] = v; }
+function sentenceComplete(si){
+  const sn = cur.sentences[si];
+  return sn.a.every((ans,pi)=> filledValue(cur.id,si,pi) === ans);
+}
+function levelComplete(){
+  return cur.sentences.every((sn,si)=> sn.a.every((ans,pi)=> filledValue(cur.id,si,pi) === ans));
+}
+function pickBlank(el){
+  if(el.classList.contains("filled")){
+    const val = el.textContent, si = +el.dataset.s, pi = +el.dataset.b;
+    delete fillMap[cur.id + "_" + si + "_" + pi];
+    delete chipsUsed[val];
+    el.classList.remove("filled"); el.textContent = "______";
+    renderBank(); refreshSentenceState(si);
+    return;
+  }
+  document.querySelectorAll(".blank.selected").forEach(b=>b.classList.remove("selected"));
+  picked = el; el.classList.add("selected");
+}
+function pickChip(el){
+  const val = el.dataset.w;
+  if(!picked) return;
+  const si = +picked.dataset.s, pi = +picked.dataset.b;
+  if(val === cur.sentences[si].a[pi]){
+    setFilled(cur.id, si, pi, val);
+    chipsUsed[val] = true;
+    picked.classList.remove("selected"); picked.classList.add("filled");
+    picked.textContent = val; picked = null;
+    addCocos(2); renderBank(); refreshSentenceState(si);
+  }else{
+    el.classList.add("shake"); picked.classList.add("shake");
+    setTimeout(()=>{ el.classList.remove("shake"); picked.classList.remove("shake"); }, 400);
+  }
+}
+/* Keeps the word bank and the tip lines in step with THIS level:
+   while there are blanks left the bank + "fill in the blanks" tip are shown,
+   once the level is complete they are hidden and the "speak it out" tip appears.
+   (Called every time a level is opened, so nothing stays hidden from the
+   previous level any more.) */
+function applyStageUI(){
+  if(!cur) return;
+  const done = levelComplete();
+  $("#bank").classList.toggle("hidden", done);
+  $("#fillTip").classList.toggle("hidden", done);
+  $("#speakTip").classList.toggle("hidden", !done);
+  if(!done){                       // a blank was emptied again — hide the "Stop Complete" card
+    $("#levelDone").classList.add("hidden");
+    $("#nextStopBtn").classList.add("hidden");
+    $("#toFinalBtn").classList.add("hidden");
+  }
+}
+function refreshSentenceState(si){
+  const tools = $("#tools" + si);
+  if(sentenceComplete(si) && !tools.querySelector(".btn-mic")) tools.insertAdjacentHTML("beforeend", micToolsHTML(si));
+  updatePhaseTag();
+  applyStageUI();
+  if(levelComplete()) checkLevelDone();
+}
+function micToolsHTML(si){
+  const spoken = S.spoken[cur.id][si];
+  return '<button class="mini-btn btn-sound" onclick="speak(' + si + ')">🔊 Listen</button>' +
+    '<button class="mini-btn btn-mic ' + (spoken ? "hidden" : "") + '" id="mic' + si + '" onclick="startSpeech(' + si + ')">🎤 Read Aloud</button>' +
+    '<button class="mini-btn btn-self ' + (spoken ? "hidden" : "") + '" onclick="gradeSelf(' + si + ')">Read it ✓</button>' +
+    '<span class="sent-badge" id="badge' + si + '">' + (spoken ? "🌿" : "") + '</span>' +
+    '<div class="heard hidden" id="heard' + si + '"></div>';
+}
+function updatePhaseTag(){
+  if(!cur) return;
+  $("#phaseTag").textContent = levelComplete() ? "Speak it out! 🎤" : "Fill in the blanks ✍️";
+}
+function renderBank(){
+  const box = $("#chipList"); box.innerHTML = "";
+  if(!cur) return;
+  const all = cur.sentences.flatMap(sn=>sn.a);
+  if(shufChips.length !== all.length) shufChips = shuffle(all);
+  shufChips.forEach(w=>{
+    if(chipsUsed[w]) return;
+    const c = document.createElement("button");
+    c.className = "chip"; c.textContent = w; c.dataset.w = w;
+    c.onclick = ()=>pickChip(c);
+    box.appendChild(c);
+  });
+}
+
+/* ---------- TTS ---------- */
+function speak(si){
+  const sn = cur.sentences[si];
+  const text = sn.t.split("___").map((p,i)=> p + (i < sn.a.length ? " " + sn.a[i] + " " : "")).join(" ").replace(/\s+/g," ");
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "en-US"; u.rate = 0.85;
+  speechSynthesis.cancel(); speechSynthesis.speak(u);
+}
+function readModel(){
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(MODEL_LINES.join(" "));
+  u.lang = "en-US"; u.rate = 0.85;
+  speechSynthesis.speak(u);
+}
+
+/* ---------- speech recognition ---------- */
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+let recog = null, finalRec = null;
+function fullSentence(si){
+  const sn = cur.sentences[si];
+  return sn.t.split("___").map((p,i)=> p + (i < sn.a.length ? " " + sn.a[i] + " " : "")).join(" ").replace(/\s+/g," ").trim();
+}
+function tokenize(s){ return s.toLowerCase().replace(/[^a-z0-9%'\s-]/g," ").split(/\s+/).filter(Boolean); }
+
+function startSpeech(si){
+  if(S.spoken[cur.id][si]) return;
+  const btn = $("#mic" + si);
+  btn.textContent = "👂 Listening..."; btn.classList.add("recording");
+  const target = fullSentence(si);
+  const finish = tr => { btn.classList.remove("recording"); btn.textContent = "🎤 Read Aloud"; gradeSpeech(si, target, tr); };
+  if(!SR){ finish(null); return; }
+  try{
+    if(recog) try{ recog.abort(); }catch(e){}
+    recog = new SR();
+    recog.lang = "en-US"; recog.interimResults = false; recog.maxAlternatives = 1;
+    let got = null;
+    recog.onresult = e => { got = e.results[0][0].transcript; };
+    recog.onerror = () => { if(got === null) finish(null); };
+    recog.onend = () => finish(got);
+    recog.start();
+    setTimeout(()=>{ if(got === null){ try{ recog.stop(); }catch(e){} } }, 12000);
+  }catch(e){ finish(null); }
+}
+function gradeSpeech(si, target, transcript){
+  const heard = $("#heard" + si);
+  heard.classList.remove("hidden");
+  if(transcript === null || transcript === undefined){
+    heard.innerHTML = "⚠️ I could not hear you. Please allow the microphone, or tap “Read it ✓” to continue. (Chrome or Edge works best.)";
+    return;
+  }
+  const tTok = Array.from(new Set(tokenize(target)));
+  const hTok = tokenize(transcript);
+  let hit = 0;
+  let html = "🗣️ I heard: <i>“" + escapeHtml(transcript) + "”</i><br>Keywords: ";
+  tTok.forEach(w=>{
+    if(hTok.includes(w)){ hit++; html += '<b class="ok">' + w + '</b> '; }
+    else { html += '<b class="miss">' + w + '</b> '; }
+  });
+  heard.innerHTML = html;
+  const ratio = hit / Math.max(1, tTok.length);
+  markSpoken(si, ratio >= 0.6 ? 5 : (ratio >= 0.3 ? 3 : 1));
+}
+function gradeSelf(si){ markSpoken(si, 2); }
+function markSpoken(si, cocos){
+  if(S.spoken[cur.id][si]) return;
+  S.spoken[cur.id][si] = true;
+  addCocos(cocos);
+  const b = $("#badge" + si); if(b) b.textContent = "🌿";
+  const m = $("#mic" + si); if(m) m.classList.add("hidden");
+  $("#sent" + si).classList.add("spoken");
+  document.querySelectorAll("#tools" + si + " .btn-self").forEach(x=>x.classList.add("hidden"));
+  save(); checkLevelDone();
+}
+function addCocos(n){ S.cocos += n; save(); }
+
+/* A stop counts as finished as soon as every blank is correct — reading the
+   sentences aloud is optional extra practice (it only earns more coconuts).
+   Either way the "Next Stop" button shows up at the bottom of the page. */
+function checkLevelDone(){
+  if(!cur || !levelComplete()) return;
+  const idx = LEVELS.indexOf(cur);
+  const allSpoken = cur.sentences.every((_,si)=> S.spoken[cur.id][si]);
+  const isNew = !S.done.includes(cur.id);
+  if(isNew){ S.done.push(cur.id); save(); confetti(); }
+
+  const read = cur.sentences.filter((_,si)=> S.spoken[cur.id][si]).length;
+  $("#lvDoneTitle").textContent = allSpoken ? "🎉 Stop Complete!" : "✅ Blanks All Done!";
+  $("#lvStars").textContent = allSpoken ? "⭐⭐⭐" : "⭐⭐";
+  $("#lvDoneMsg").innerHTML = allSpoken
+    ? "You finished <b>" + cur.title + "</b> and read every sentence aloud — excellent speaking!"
+    : "Every blank in <b>" + cur.title + "</b> is correct, and you read <b>" + read + " of " +
+      cur.sentences.length + "</b> sentences aloud. Tap 🎤 <b>Read Aloud</b> above to earn more coconuts 🥥 — " +
+      "or move on to the next stop whenever you like.";
+
+  const nextBtn = $("#nextStopBtn"), finBtn = $("#toFinalBtn");
+  if(idx + 1 < LEVELS.length){
+    nextBtn.textContent = "➡ Next Stop · " + LEVELS[idx + 1].title;
+    nextBtn.classList.remove("hidden");
+    finBtn.classList.add("hidden");
+  }else{
+    nextBtn.classList.add("hidden");
+    finBtn.classList.remove("hidden");
+  }
+  if(allSpoken) $("#speakTip").classList.add("hidden");
+  $("#levelDone").classList.remove("hidden");
+  if(isNew) $("#levelDone").scrollIntoView({behavior:"smooth", block:"center"});
+}
+function confetti(){
+  const em = ["🥥","⭐","🌴","🎉","🌺","🥭"];
+  for(let i=0;i<26;i++){
+    const s = document.createElement("span");
+    s.className = "confetti"; s.textContent = em[Math.floor(Math.random()*em.length)];
+    s.style.left = Math.random()*100 + "vw";
+    s.style.animationDuration = (2 + Math.random()*2) + "s";
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(), 4300);
+  }
+}
+
+/* =====================================================================
+   FINAL · FREE TALK — two modes:
+     • Challenge Mode : speak on your own → the game scores it and advises
+     • Practice Mode  : listen to the model → read it aloud line by line
+   ===================================================================== */
+
+/* The model talk, split into lines for listen-and-repeat. */
+const MODEL_LINES = [
+  "Hello everyone! Today I'd like to introduce Hainan Free Trade Port.",
+  "Hainan is located in far southern China.",
+  "It has a warm tropical climate with long summers and mild winters.",
+  "In Hainan you can visit amazing theme parks like Sanya Atlantis, and enjoy tasty food such as Wenchang Chicken.",
+  "The island also has a beautiful scenic coastal highway and a fast high-speed rail.",
+  "Hainan is developing fast: tourism, modern services and high-tech industry are growing, and rockets launch from the Wenchang Space Launch Center!",
+  "Best of all, Hainan has low tax rates, visa-free entry for visitors from 59 countries, and wonderful duty-free shopping.",
+  "Welcome to Hainan — the shining pearl of the South! Thank you!"
+];
+const MODEL_KEYS = ["Hainan Free Trade Port","southern China","tropical climate","theme parks",
+  "Wenchang Chicken","scenic coastal highway","high-speed rail","modern services","high-tech industry",
+  "Wenchang Space Launch Center","low tax rates","visa-free entry","duty-free shopping","tourism"];
+
+/* The six topics the talk should cover — used by the scorer. */
+const TOPICS = [
+  { key:"location", label:"📍 Location &amp; climate", tip:"Hainan is a tropical island province in the far south of China.",
+    words:["hainan","island","south","southern","china","tropical","climate","warm","sunny","summer","winter","ocean","sea","gateway","province","weather"] },
+  { key:"fun", label:"🎢 Fun &amp; sightseeing", tip:"There are amazing theme parks, beautiful beaches and a scenic coastal highway.",
+    words:["theme park","theme parks","park","parks","atlantis","sanya","attraction","attractions","visit","scenic","beach","beaches","highway","coastal","resort","sightseeing","holiday","vacation"] },
+  { key:"food", label:"🍗 Food", tip:"You can enjoy Wenchang Chicken, fresh seafood and tropical fruit.",
+    words:["food","chicken","wenchang","coconut","seafood","fruit","dish","dishes","delicious","tasty","meal","snack","drink","coffee","tea"] },
+  { key:"transport", label:"🚄 Transportation", tip:"Hainan has a high-speed rail, a ring highway and many flights to the island.",
+    words:["transport","transportation","rail","train","high-speed","highway","airport","flight","flights","ferry","metro","road","roads","convenient","convenience","bus","taxi"] },
+  { key:"industries", label:"🚀 Industries", tip:"Tourism, modern services and high-tech industry are growing fast, and rockets launch from Wenchang.",
+    words:["industry","industries","tourism","tourist","service","services","high-tech","technology","space","rocket","rockets","launch","business","economy","economic","company","companies","investment","invest","develop","developing","development","grow","growing","growth","modern"] },
+  { key:"policies", label:"📜 Policies", tip:"Hainan has low tax rates, visa-free entry for 59 countries and duty-free shopping.",
+    words:["policy","policies","tax","taxes","visa","visa-free","duty-free","duty free","shopping","market","free trade port","customs","regulation","regulations","opening","reform","incentive","preferential","tariff"] }
+];
+
+const SELF_ITEMS = [
+  { k:"greet",    label:"🎤 I greeted the audience and said what my talk was about." },
+  { k:"location", label:"📍 I talked about where Hainan is and its climate." },
+  { k:"fun",      label:"🎢 I talked about theme parks and other places to visit." },
+  { k:"food",     label:"🍗 I talked about Hainan food." },
+  { k:"transport",label:"🚄 I talked about transportation on the island." },
+  { k:"industries",label:"🚀 I talked about industries and development." },
+  { k:"policies", label:"📜 I talked about policies (tax, visa, duty-free shopping)." },
+  { k:"ending",   label:"👋 I finished with a closing sentence." }
+];
+const LINKERS = ["First of all, …","Besides, …","What's more, …","Also, …","For example, …","Last but not least, …","All in all, …"];
+
+let finalMode = null, timerInt = null, chTimerInt = null, chRec = null, chText = "", chPending = false, chRunning = false, chRestarts = 0;
+
+function openFinal(){
+  show("final");
+  if(VIDEOS.final){
+    $("#finalVideoCard").classList.remove("hidden");
+    buildPlayer($("#finalVideoFrame"), VIDEOS.final, null);
+  }else{
+    $("#finalVideoCard").classList.add("hidden");
+  }
+  if(S.finalDone) $("#finalResult").classList.remove("hidden");
+  chooseFinalMode();          // always start from the two options
+}
+function chooseFinalMode(){
+  leaveFinal();
+  finalMode = null;
+  $("#finalBody").classList.add("hidden");
+  $("#modeChooser").classList.remove("hidden");
+  $("#modeChooser").scrollIntoView({behavior:"smooth", block:"start"});
+}
+function setFinalMode(mode){
+  finalMode = mode; S.finalMode = mode; save();
+  $("#modeChooser").classList.add("hidden");
+  $("#finalBody").classList.remove("hidden");
+  $("#modePill").innerHTML = (mode === "speak")
+    ? "🎯 Challenge Mode · Speak It Yourself"
+    : "🎧 Practice Mode · Listen &amp; Read Along";
+  $("#readPanel").classList.toggle("hidden", mode !== "read");
+  $("#challengePanel").classList.toggle("hidden", mode !== "speak");
+  if(mode === "read"){ stopSpeaking(); resetReading(); }
+  else { stopSpeaking(); clearInterval(timerInt); chReset(); }
+  window.scrollTo(0, 0);
+}
+function leaveFinal(){
+  stopSpeaking();
+  clearInterval(timerInt); clearInterval(chTimerInt);
+  chRunning = false; chPending = false;
+  rdRunning = false; rdPending = false;
+  try{ if(chRec) chRec.abort(); }catch(e){}
+  try{ if(finalRec) finalRec.abort(); }catch(e){}
+  try{ if(recog) recog.abort(); }catch(e){}
+}
+function stopSpeaking(){ try{ speechSynthesis.cancel(); }catch(e){} }
+function speakText(text){
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "en-US"; u.rate = 0.85;
+  speechSynthesis.cancel(); speechSynthesis.speak(u);
+}
+
+/* ---------- word matching + scoring ---------- */
+function hasWord(text, w){
+  try{ return new RegExp("\\b" + w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b", "i").test(text); }
+  catch(e){ return text.toLowerCase().indexOf(w) > -1; }
+}
+function scoreTalk(text){
+  const t = " " + text.toLowerCase() + " ";
+  const toks = tokenize(text);
+  const wc = toks.length;
+  const uniq = new Set(toks).size / Math.max(1, wc);
+  const fillers = (t.match(/\b(um+|uh+|er+|erm+|hmm+|you know|i mean)\b/g) || []).length;
+  const greeting = /\b(hello|hi|good morning|good afternoon|everyone|today i('| a)?d like|i want to (talk|introduce)|let me introduce)\b/.test(t);
+  const ending = /\b(thank you|thanks|welcome to hainan|in short|all in all|in a word|that's all|hope you)\b/.test(t);
+
+  const covered = [], missing = [];
+  TOPICS.forEach(tp=>{
+    const hits = tp.words.filter(w => hasWord(t, w));
+    const item = { key:tp.key, label:tp.label, tip:tp.tip, hits:hits.length, sample:hits.slice(0,3) };
+    if(hits.length) covered.push(item); else missing.push(item);
+  });
+
+  const covScore = covered.length / TOPICS.length * 60;
+  const lenScore = Math.min(wc / 80, 1) * 25;
+  let flu = 15 * Math.min(1, Math.max(0, (uniq - 0.35) / 0.3)) - Math.min(7, fillers * 1.5);
+  let score = Math.max(5, Math.min(100, Math.round(covScore + lenScore + Math.max(0, flu))));
+
+  const sug = [];
+  if(wc < 40) sug.push("Your talk had only <b>" + wc + " words</b>. Aim for 80–120 words (about one minute): one or two sentences for each of the six topics.");
+  else if(wc < 80) sug.push("Good start — <b>" + wc + " words</b>. Add a few details to reach about 100 words and fill the whole minute.");
+  else sug.push("Great length: <b>" + wc + " words</b>, about one minute of speaking. Well done!");
+  if(!greeting) sug.push("Open with a greeting and your topic: “Hello everyone! Today I'd like to introduce Hainan Free Trade Port.”");
+  if(!ending) sug.push("Close with a strong ending: “Welcome to Hainan — the shining pearl of the South! Thank you!”");
+  if(fillers >= 2) sug.push("You used filler sounds (um / uh) <b>" + fillers + "</b> times. Replace them with a short silent pause — it sounds far more confident.");
+  if(uniq < 0.5 && wc > 25) sug.push("You repeated the same words a lot. Try synonyms: <i>amazing, wonderful, beautiful, impressive</i>.");
+  if(covered.length >= 5) sug.push("Excellent coverage — you touched on <b>" + covered.length + " of the 6 topics</b>!");
+  if(missing.length) sug.push("Next time add the missing topic(s) on the left — each one is worth extra marks.");
+
+  const grade = score >= 85 ? { s:"⭐⭐⭐", t:"Excellent! You can already introduce Hainan FTP." }
+              : score >= 70 ? { s:"⭐⭐", t:"Well done! Your talk is clear and informative." }
+              : score >= 55 ? { s:"⭐", t:"Good try — a little more practice and it will shine." }
+              : { s:"🌱", t:"Nice start! Follow the outline and try again." };
+  return { score:score, wc:wc, uniq:uniq, fillers:fillers, covered:covered, missing:missing, sug:sug, grade:grade };
+}
+
+/* ---------- shared feedback panel ---------- */
+function renderFeedback(res){
+  const box = $("#chFeedback");
+  const cov = res.covered.length
+    ? res.covered.map(c => "<li>✅ " + c.label + (c.sample.length ? ' <span class="fb-hint">(' + escapeHtml(c.sample.join(", ")) + ")</span>" : "") + "</li>").join("")
+    : '<li class="fb-hint">Nothing was detected yet — speak a little louder next time.</li>';
+  const miss = res.missing.length
+    ? res.missing.map(m => '<li class="miss">▫ ' + m.label + '<br><span class="fb-hint">Try: “' + escapeHtml(m.tip) + '”</span></li>').join("")
+    : "<li>🎉 You covered all six topics!</li>";
+  const links = LINKERS.map(l => '<button class="chip-lite" onclick="speakText(\'' + l.replace("…", "").trim() + '\')">' + escapeHtml(l) + "</button>").join("");
+
+  box.innerHTML =
+    '<h3>🤖 Coach Feedback</h3>' +
+    '<div class="fb-head">' +
+      '<div class="fb-score">' + res.score + '<span>/100</span></div>' +
+      '<div class="fb-stars">' + res.grade.s + '</div>' +
+      '<div class="fb-grade">' + res.grade.t + '</div>' +
+    '</div>' +
+    '<div class="fb-cols">' +
+      '<div>' +
+        '<h4>✅ Topics you covered</h4><ul>' + cov + '</ul>' +
+        '<h4>🎯 Topics to add next time</h4><ul>' + miss + '</ul>' +
+      '</div>' +
+      '<div>' +
+        '<h4>💡 Advice for you</h4><ul><li>' + res.sug.join("</li><li>") + '</li></ul>' +
+        '<h4>🔗 Linking words to sound smooth</h4><div>' + links + '</div>' +
+      '</div>' +
+    '</div>' +
+    '<p class="fb-note">' + (res.self
+      ? "Scores are based on your own checklist. Tap “Try Again” and beat it."
+      : "Scored on topic coverage (60), length (25) and fluency (15) from what the game heard.") + "</p>";
+
+  box.classList.remove("hidden");
+  box.scrollIntoView({behavior:"smooth", block:"start"});
+
+  if(!S.finalDone){
+    S.finalDone = true; S.finalBest = res.score; addCocos(Math.max(5, Math.round(res.score / 5)));
+    confetti(); confetti();
+  }else if(res.score > (S.finalBest || 0)){
+    S.finalBest = res.score; save();
+  }
+  $("#finalMsg").innerHTML = "Your Free Talk score: <b>" + res.score + " / 100</b> " + res.grade.s +
+    "<br>You collected <b>" + S.cocos + " 🥥</b> in total and you can now introduce Hainan Free Trade Port in English!";
+  $("#finalResult").classList.remove("hidden");
+}
+
+/* ================== CHALLENGE MODE ================== */
+function chReset(){
+  clearInterval(chTimerInt);
+  chRunning = false; chPending = false; chText = "";
+  try{ if(chRec) chRec.abort(); }catch(e){}
+  $("#chTimer").textContent = 60;
+  $("#chHeard").classList.add("hidden"); $("#chHeard").innerHTML = "";
+  $("#chFeedback").classList.add("hidden"); $("#chFeedback").innerHTML = "";
+  $("#chSelfCheck").classList.add("hidden");
+  $("#chMic").classList.remove("hidden"); $("#chMic").textContent = "🎤 Start Speaking";
+  $("#chStop").classList.add("hidden");
+  $("#chAgain").classList.add("hidden");
+  $("#finalResult").classList.toggle("hidden", !S.finalDone);
+}
+function chStart(){
+  chText = ""; chRunning = true; chPending = false;
+  $("#chFeedback").classList.add("hidden");
+  $("#chSelfCheck").classList.add("hidden");
+  let t = 60; $("#chTimer").textContent = t;
+  clearInterval(chTimerInt);
+  chTimerInt = setInterval(()=>{
+    t--; $("#chTimer").textContent = Math.max(0, t);
+    if(t <= 0){ clearInterval(chTimerInt); chFinish(); }
+  }, 1000);
+
+  if(!SR){
+    $("#chHeard").classList.remove("hidden");
+    $("#chHeard").innerHTML = "⚠️ Speech recognition is not available in this browser. Speak your talk aloud, then check the boxes below to score yourself.";
+    chShowSelfCheck();
+    return;
+  }
+  $("#chMic").textContent = "👂 Listening...";
+  $("#chStop").classList.remove("hidden");
+  try{ if(chRec) chRec.abort(); }catch(e){}
+  chRestarts = 0;
+  chRec = new SR();
+  chRec.lang = "en-US"; chRec.interimResults = false; chRec.continuous = true;
+  chRec.onresult = e => { for(let i=0;i<e.results.length;i++) chText += e.results[i][0].transcript + " "; };
+  chRec.onerror = e => {
+    const err = e && e.error;
+    if(err === "not-allowed" || err === "service-not-allowed" || err === "audio-capture"){
+      chRunning = false; clearInterval(chTimerInt); chShowSelfCheck();
+    }
+  };
+  chRec.onend = () => {
+    if(chPending){ chPending = false; chAnalyze(); return; }
+    if(!chRunning) return;
+    // the browser stopped listening during a pause — keep listening until the timer runs out
+    if(chRestarts++ > 25){ chRunning = false; chFinish(); return; }
+    setTimeout(()=>{ if(!chRunning) return; try{ chRec.start(); }catch(e){} }, 220);
+  };
+  try{ chRec.start(); }catch(e){ chShowSelfCheck(); }
+}
+function chFinish(){
+  clearInterval(chTimerInt);
+  chRunning = false;
+  $("#chMic").textContent = "🎤 Start Speaking";
+  $("#chStop").classList.add("hidden");
+  $("#chAgain").classList.remove("hidden");
+  if(!SR){ chShowSelfCheck(); return; }
+  chPending = true;
+  try{ chRec.stop(); }catch(e){}
+  setTimeout(()=>{ if(chPending){ chPending = false; chAnalyze(); } }, 1200);
+}
+function chAnalyze(){
+  clearInterval(chTimerInt);
+  chRunning = false;
+  $("#chMic").classList.remove("hidden");
+  $("#chMic").textContent = "🎤 Start Speaking";
+  $("#chStop").classList.add("hidden");
+  $("#chAgain").classList.remove("hidden");
+  const text = (chText || "").trim();
+  if(!text){ chShowSelfCheck(); return; }
+  $("#chHeard").classList.remove("hidden");
+  $("#chHeard").innerHTML = "🗣️ <b>I heard:</b> <i>“" + escapeHtml(text) + "”</i>";
+  renderFeedback(scoreTalk(text));
+}
+function chShowSelfCheck(){
+  clearInterval(chTimerInt);
+  $("#chMic").classList.add("hidden");
+  $("#chStop").classList.add("hidden");
+  $("#chAgain").classList.remove("hidden");
+  const box = $("#chSelfList"); box.innerHTML = "";
+  SELF_ITEMS.forEach(it=>{
+    const l = document.createElement("label");
+    l.innerHTML = '<input type="checkbox" value="' + it.k + '"> <span>' + it.label + "</span>";
+    box.appendChild(l);
+  });
+  $("#chSelfCheck").classList.remove("hidden");
+  $("#chSelfCheck").scrollIntoView({behavior:"smooth", block:"center"});
+}
+function chScoreSelf(){
+  const on = Array.from(document.querySelectorAll("#chSelfList input:checked")).map(i=>i.value);
+  const covered = TOPICS.filter(tp => on.includes(tp.key)).map(tp => ({ label:tp.label, tip:tp.tip, hits:1, sample:[] }));
+  const missing = TOPICS.filter(tp => !on.includes(tp.key)).map(tp => ({ label:tp.label, tip:tp.tip }));
+  const score = Math.round(on.length / SELF_ITEMS.length * 100);
+  const sug = [];
+  if(!on.includes("greet")) sug.push("Add a greeting and your topic in the first sentence — it makes your talk sound organized.");
+  if(!on.includes("ending")) sug.push("Add a closing sentence, for example: “Welcome to Hainan — the shining pearl of the South! Thank you!”");
+  if(covered.length >= 5) sug.push("You covered most of the six topics — excellent preparation for the real talk!");
+  if(missing.length) sug.push("Rehearse the missing topic(s) on the left before your next try.");
+  sug.push("Now say the whole talk again without looking at your notes, and record it on your phone to hear yourself.");
+  const grade = score >= 85 ? { s:"⭐⭐⭐", t:"Excellent! You are ready to present." }
+              : score >= 60 ? { s:"⭐⭐", t:"Good work — a little more detail and it will be perfect." }
+              : { s:"🌱", t:"Keep going! Read the outline again and try once more." };
+  renderFeedback({ score:score, covered:covered, missing:missing, sug:sug, grade:grade, self:true });
+}
+
+/* ================== PRACTICE MODE ================== */
+/* Shows the whole model talk with the key expressions in bold. */
+function renderModelSpeech(){
+  const box = $("#modelSpeech"); if(!box) return;
+  let html = escapeHtml(MODEL_LINES.join(" "));
+  MODEL_KEYS.slice().sort((a,b)=>b.length-a.length).forEach(k=>{
+    const re = new RegExp("\\b" + k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b", "gi");
+    html = html.replace(re, m => "<b>" + m + "</b>");
+  });
+  box.innerHTML = "<b>Model talk</b> — tap “Listen to the Model”, then read the whole talk aloud:<br>“" + html + "”";
+}
+/* How long the student has to read the whole talk aloud. */
+const READ_SECONDS = 120;
+let rdText = "", rdStart = 0, rdRunning = false, rdPending = false, rdScored = false, rdRestarts = 0;
+
+function showReadTimer(){
+  $("#timer").textContent = READ_SECONDS;
+  $("#timer").classList.remove("time-up");
+}
+function startTimer(){
+  clearInterval(timerInt);
+  let t = READ_SECONDS;
+  $("#timer").textContent = t;
+  $("#timer").classList.remove("time-up");
+  timerInt = setInterval(()=>{
+    t--;
+    $("#timer").textContent = Math.max(0, t);
+    if(t <= 10) $("#timer").classList.add("time-up");
+    if(t <= 0){
+      clearInterval(timerInt);
+      $("#timer").textContent = "⏰";
+      finishReading();
+    }
+  }, 1000);
+}
+
+/* ---------- practice mode: read the whole talk aloud ---------- */
+function resetReading(){
+  clearInterval(timerInt);
+  rdRunning = false; rdPending = false; rdScored = false; rdText = ""; rdRestarts = 0;
+  try{ if(finalRec) finalRec.abort(); }catch(e){}
+  finalRec = null;
+  stopSpeaking();
+  showReadTimer();
+  $("#finalHeard").classList.add("hidden"); $("#finalHeard").innerHTML = "";
+  $("#rdFeedback").classList.add("hidden"); $("#rdFeedback").innerHTML = "";
+  $("#finalResult").classList.toggle("hidden", !S.finalDone);
+  $("#finalMic").classList.remove("hidden");
+  $("#finalMic").textContent = "🎤 Start Reading";
+  $("#finalStop").classList.add("hidden");
+  $("#finalSelf").classList.add("hidden");
+  $("#finalAgain").classList.add("hidden");
+}
+function startFinalSpeech(){
+  const heard = $("#finalHeard");
+  resetReading();
+  heard.classList.remove("hidden");
+
+  if(!SR){
+    $("#finalMic").classList.add("hidden");
+    $("#finalSelf").classList.remove("hidden");
+    heard.innerHTML = "⚠️ Speech recognition is not available in this browser (Chrome or Edge is best). Read the talk aloud, then finish with the button below.";
+    return;
+  }
+
+  rdText = ""; rdRunning = true; rdPending = false; rdScored = false; rdRestarts = 0;
+  rdStart = Date.now();
+  $("#finalMic").classList.add("hidden");
+  $("#finalStop").classList.remove("hidden");
+  $("#finalAgain").classList.add("hidden");
+  $("#finalSelf").classList.add("hidden");
+  heard.innerHTML = "🎙️ <b>Listening…</b> Read the whole talk aloud from the beginning. Tap “🛑 Stop &amp; Get My Score” when you finish (or wait for the 2 minutes to run out).";
+  startTimer();
+
+  try{ if(finalRec) finalRec.abort(); }catch(e){}
+  finalRec = new SR();
+  finalRec.lang = "en-US"; finalRec.interimResults = false; finalRec.continuous = true; finalRec.maxAlternatives = 1;
+  finalRec.onresult = e => { for(let i=0;i<e.results.length;i++) rdText += e.results[i][0].transcript + " "; };
+  finalRec.onerror = e => {
+    const err = e && e.error;
+    if(err === "not-allowed" || err === "service-not-allowed" || err === "audio-capture"){
+      rdRunning = false; clearInterval(timerInt);
+      $("#finalStop").classList.add("hidden");
+      $("#finalMic").classList.remove("hidden");
+      $("#finalMic").textContent = "🎤 Start Reading";
+      $("#finalSelf").classList.remove("hidden");
+      $("#finalAgain").classList.remove("hidden");
+      heard.innerHTML = "⚠️ The microphone could not be used. Allow the microphone in your browser, then try again — or read the talk aloud and press “✅ I read it (no score)”.";
+    }
+  };
+  finalRec.onend = () => {
+    if(rdPending){ rdPending = false; rdAnalyze(); return; }
+    if(!rdRunning) return;
+    // the browser stopped listening during a pause — keep listening until the student stops
+    if(rdRestarts++ > 30){ finishReading(); return; }
+    setTimeout(()=>{ if(!rdRunning) return; try{ finalRec.start(); }catch(e){} }, 220);
+  };
+  try{ finalRec.start(); }catch(e){ rdRunning = false; $("#finalSelf").classList.remove("hidden"); }
+}
+function finishReading(){
+  if(rdPending || rdScored) return;
+  clearInterval(timerInt);
+  rdRunning = false;
+  $("#finalStop").classList.add("hidden");
+  $("#finalMic").classList.add("hidden");
+  $("#finalAgain").classList.remove("hidden");
+  if(!SR || !finalRec){ rdAnalyze(); return; }
+  rdPending = true;
+  try{ finalRec.stop(); }catch(e){ rdPending = false; rdAnalyze(); }
+  setTimeout(()=>{ if(rdPending){ rdPending = false; rdAnalyze(); } }, 1200);
+}
+function rdAnalyze(){
+  if(rdScored) return;
+  rdScored = true; rdRunning = false; rdPending = false;
+  clearInterval(timerInt);
+  $("#finalStop").classList.add("hidden");
+  $("#finalMic").classList.add("hidden");
+  $("#finalAgain").classList.remove("hidden");
+  const text = (rdText || "").trim();
+  const seconds = Math.max(3, Math.round((Date.now() - rdStart) / 1000));
+  const heard = $("#finalHeard");
+  heard.classList.remove("hidden");
+  if(!text){
+    $("#finalMic").classList.remove("hidden");
+    $("#finalMic").textContent = "🎤 Start Reading";
+    $("#finalSelf").classList.remove("hidden");
+    $("#rdFeedback").classList.add("hidden"); $("#rdFeedback").innerHTML = "";
+    heard.innerHTML = "⚠️ Nothing was recognized this time. Check that the microphone is on and that you are close to it, then tap <b>Start Reading</b> again — or press “✅ I read it (no score)”.";
+    return;
+  }
+  heard.innerHTML = "🗣️ <b>I heard:</b> <i>“" + escapeHtml(text) + "”</i>";
+  renderReadFeedback(scoreReading(text, seconds));
+}
+function finishSelf(){
+  clearInterval(timerInt);
+  rdScored = true; rdRunning = false; rdPending = false;
+  try{ if(finalRec) finalRec.abort(); }catch(e){}
+  stopSpeaking();
+  $("#finalStop").classList.add("hidden");
+  $("#finalMic").classList.add("hidden");
+  $("#finalSelf").classList.add("hidden");
+  $("#finalAgain").classList.remove("hidden");
+  if(!S.finalDone){ S.finalDone = true; addCocos(20); } else { save(); }
+  confetti(); confetti();
+  $("#finalMsg").innerHTML = "You read the whole model talk aloud — brilliant!" +
+    "<br>You collected <b>" + S.cocos + " 🥥</b> in total and you can now introduce Hainan Free Trade Port in English!";
+  $("#finalResult").classList.remove("hidden");
+  $("#finalResult").scrollIntoView({behavior:"smooth", block:"center"});
+}
+
+/* ---------- automatic scoring of the reading ---------- */
+function esc1(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/'/g,"&#39;").replace(/"/g,"&quot;"); }
+function scoreReading(text, seconds){
+  const model = MODEL_LINES.join(" ");
+  const toks = model.match(/[A-Za-z0-9%'’-]+/g) || [];
+  const pool = {};
+  tokenize(text).forEach(w => { pool[w] = (pool[w] || 0) + 1; });
+  let hit = 0;
+  const marks = toks.map(w => {
+    const k = w.toLowerCase().replace(/’/g, "'");
+    if(pool[k]){ pool[k]--; hit++; return true; }
+    return false;
+  });
+  const acc = hit / Math.max(1, toks.length);
+  const saidWords = tokenize(text).length;
+  const keyHits = MODEL_KEYS.filter(k => hasWord(" " + text.toLowerCase() + " ", k));
+  const missKeys = MODEL_KEYS.filter(k => keyHits.indexOf(k) < 0);
+  const wpm = Math.round(saidWords / Math.max(1, seconds) * 60);
+
+  const accScore = Math.min(1, acc / 0.75) * 60;
+  const keyScore = keyHits.length / MODEL_KEYS.length * 30;
+  let paceScore, paceNote;
+  if(saidWords < 25){ paceScore = 2; paceNote = "only a small part of the talk came through — read the whole text next time"; }
+  else if(wpm < 70){ paceScore = 7; paceNote = "slow and careful, which is good for accuracy"; }
+  else if(wpm <= 155){ paceScore = 10; paceNote = "a natural reading pace"; }
+  else { paceScore = 7; paceNote = "a little too fast — slow down so every word is clear"; }
+  const score = Math.max(5, Math.min(100, Math.round(accScore + keyScore + paceScore)));
+
+  const sug = [];
+  if(acc >= 0.85) sug.push("Superb! The game recognized <b>" + Math.round(acc*100) + "%</b> of the talk — your pronunciation is clear and easy to follow.");
+  else if(acc >= 0.6) sug.push("Good reading. The game recognized <b>" + Math.round(acc*100) + "%</b> of the words; slow down slightly on the longer words and on word endings (-s, -ed).");
+  else sug.push("The game recognized only <b>" + Math.round(acc*100) + "%</b> of the talk. Read a little more slowly, open your mouth wider and keep the microphone close.");
+  sug.push("You read <b>" + saidWords + " words</b> in " + seconds + " seconds (" + wpm + " words per minute) — " + paceNote + ".");
+  if(missKeys.length) sug.push("Practise these expressions out loud, then read the whole talk again: <b>" + escapeHtml(missKeys.slice(0,5).join(" · ")) + "</b>.");
+  else sug.push("You read every key expression of the talk — excellent work!");
+  if(seconds < 35 && saidWords > 25) sug.push("You finished very quickly — remember to pause at the full stops (.) so your listeners can follow you.");
+
+  const grade = score >= 85 ? { s:"⭐⭐⭐", t:"Excellent reading! You sound very close to the model talk." }
+              : score >= 70 ? { s:"⭐⭐", t:"Well done! Your reading is clear and complete." }
+              : score >= 55 ? { s:"⭐", t:"Good try — listen to the model once more, then read it a little slower." }
+              : { s:"🌱", t:"Nice start! Follow the text and read it aloud again." };
+  return { score:score, acc:acc, hit:hit, total:toks.length, saidWords:saidWords, wpm:wpm, seconds:seconds,
+           marks:marks, keyHits:keyHits, missKeys:missKeys, sug:sug, grade:grade };
+}
+function markedModel(res){
+  let i = 0;
+  return MODEL_LINES.join(" ").replace(/[A-Za-z0-9%'’-]+/g, m => {
+    const ok = res.marks[i] === true; i++;
+    return '<b class="' + (ok ? "ok" : "miss") + '">' + escapeHtml(m) + "</b>";
+  });
+}
+function renderReadFeedback(res){
+  const box = $("#rdFeedback");
+  const keys = res.keyHits.length
+    ? res.keyHits.map(k => '<li>✅ ' + escapeHtml(k) + ' <button class="chip-lite" onclick="speakText(\'' + esc1(k) + '\')">🔊</button></li>').join("")
+    : '<li class="fb-hint">No key expression was recognized this time.</li>';
+  const missK = res.missKeys.length
+    ? res.missKeys.map(k => '<li class="miss">▫ ' + escapeHtml(k) + ' <button class="chip-lite" onclick="speakText(\'' + esc1(k) + '\')">🔊</button></li>').join("")
+    : "<li>🎉 You read every key expression!</li>";
+
+  box.innerHTML =
+    '<h3>📊 Your Reading Score</h3>' +
+    '<div class="fb-head">' +
+      '<div class="fb-score">' + res.score + '<span>/100</span></div>' +
+      '<div class="fb-stars">' + res.grade.s + '</div>' +
+      '<div class="fb-grade">' + res.grade.t + '</div>' +
+    '</div>' +
+    '<div class="rd-stats">' +
+      '<div class="rd-stat"><b>' + Math.round(res.acc*100) + '%</b><span>words recognized (' + res.hit + '/' + res.total + ')</span></div>' +
+      '<div class="rd-stat"><b>' + res.keyHits.length + '/' + MODEL_KEYS.length + '</b><span>key expressions read</span></div>' +
+      '<div class="rd-stat"><b>' + res.wpm + '</b><span>words per minute</span></div>' +
+      '<div class="rd-stat"><b>' + res.seconds + 's</b><span>reading time</span></div>' +
+    '</div>' +
+    '<div class="fb-cols">' +
+      '<div>' +
+        '<h4>✅ Key expressions you read well</h4><ul>' + keys + '</ul>' +
+        '<h4>🔁 Expressions to practise (tap 🔊 to hear)</h4><ul>' + missK + '</ul>' +
+      '</div>' +
+      '<div>' +
+        '<h4>💡 How to improve</h4><ul><li>' + res.sug.join("</li><li>") + '</li></ul>' +
+      '</div>' +
+    '</div>' +
+    '<h4 style="margin-top:18px">🔎 Word-by-word check</h4>' +
+    '<p class="fb-hint">Green = the game heard it · red = not recognized (pronunciation, or you skipped it).</p>' +
+    '<div class="rd-text">' + markedModel(res) + '</div>' +
+    '<p class="fb-note">Scored on words recognized (60), key expressions (30) and reading pace (10) — all from what the microphone heard.</p>';
+
+  box.classList.remove("hidden");
+  box.scrollIntoView({behavior:"smooth", block:"start"});
+
+  if(!S.finalDone){
+    S.finalDone = true; S.finalBest = res.score; addCocos(Math.max(5, Math.round(res.score / 5)));
+    confetti(); confetti();
+  }else if(res.score > (S.finalBest || 0)){
+    S.finalBest = res.score; save();
+  }
+  $("#finalMsg").innerHTML = "Your Reading score: <b>" + res.score + " / 100</b> " + res.grade.s +
+    "<br>You collected <b>" + S.cocos + " 🥥</b> in total and you can now read the whole talk about Hainan Free Trade Port in English!";
+  $("#finalResult").classList.remove("hidden");
+}
+
+/* ================== RESET ================== */
+function resetAll(){
+  leaveFinal();
+  S = { cocos:0, unlocked:0, done:[], spoken:{}, watched:{}, finalDone:false, finalBest:0, finalMode:null };
+  fillMap = {}; shufChips = []; chipsUsed = {};
+  save(); goMap();
+}
+
+/* ================== INIT ================== */
+updateCocos(); renderMap(); renderModelSpeech();
+if(VIDEOS.intro) $("#introVideoBtn").classList.remove("hidden");
+</script>
+</body>
+</html>
